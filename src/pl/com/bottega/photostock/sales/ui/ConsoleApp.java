@@ -50,7 +50,7 @@ public class ConsoleApp {
             System.out.println("sorry.... nie stać cię");
         }
 
-       /* System.out.println("total cost: "+cost);
+        /*System.out.println("total cost: "+cost);
         System.out.println("can efford?: "+client.canAfford(cost));
         System.out.println("balance: "+client.balance());*/
     }

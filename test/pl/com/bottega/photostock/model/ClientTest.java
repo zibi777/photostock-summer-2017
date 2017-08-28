@@ -40,7 +40,7 @@ public class ClientTest {
                 /*Money.valueOf(100),*/
                 Money.valueOf(100));
         //then
-        assertTrue(client.canAfford(Money.valueOf(200)));
+        assertTrue(client.canAfford(Money.valueOf(100)));
         assertFalse(client.canAfford(Money.valueOf(201)));
     }
 
@@ -48,7 +48,7 @@ public class ClientTest {
     public void shouldCheckAndRechargeClient(){
         //given
         //when
-        client.charge(Money.valueOf(200),"Testowy zakup");
+        client.charge(Money.valueOf(100),"Testowy zakup");
         client.recharge(Money.valueOf(100));
         //then
         assertTrue(client.canAfford(Money.valueOf(100)));

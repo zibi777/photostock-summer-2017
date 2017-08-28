@@ -15,16 +15,18 @@ public class Client {
     private Money creditLimit;
     private List<Transaction> transactions = new LinkedList<>();
 
-    public Money balance(){
+    private Money balance(){
         Money balance = Money.ZERO;
-        Money balance2 = Money.ZERO;
+        /*Money balance2 = Money.ZERO;*/
         for (Transaction transaction : transactions){
-            balance2 = transaction.getAmount();
+            /*balance2 = transaction.getAmount();
             balance = balance.add(balance2);
-            //balance.add(transaction.getAmount());
+            balance.add(transaction.getAmount());*/
+            balance = balance.add(transaction.getAmount());
             //return transaction.getAmount();
         }
-        return  balance;
+        return balance;
+        //return Money.ZERO.add(balance);
     }
 
     public ClientStatus getStatus() {
@@ -47,7 +49,7 @@ public class Client {
 
     public boolean canAfford (Money amount){
         Money budget = balance();
-        budget.add(creditLimit);
+        budget = budget.add(creditLimit);
         /*return  amount.lte(balance.add(creditLimit)) ;*/
         return amount.lte(budget);
     }
@@ -57,8 +59,8 @@ public class Client {
             throw new IllegalStateException("Not enough balance");
         /*balance = balance.subtract(amount);*/
         transactions.add(new Transaction(amount.neg(), reason));
-
     }
+
     public void recharge(Money amount){
         /*balance = balance.add(amount);*/
         transactions.add(new Transaction(amount,"Recharge account"));
