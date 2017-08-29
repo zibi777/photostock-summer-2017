@@ -99,4 +99,14 @@ public class Money implements Comparable<Money> {
     public Money percent(int percent) {
         return new Money(cents * percent / 100, currency);
     }
+
+    public String getCurrency() {
+        return currency;
+    }
+    public String currency(){
+        return currency;
+    }
+    public Money convert(String targetCurrency, Double exRate){
+        return new Money((long) (exRate*cents),targetCurrency);
+    }
 }

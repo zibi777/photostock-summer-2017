@@ -3,6 +3,9 @@ package pl.com.bottega.photostock.sales.ui;
 import pl.com.bottega.photostock.sales.infrastructure.InMemoryPictureRepository;
 import pl.com.bottega.photostock.sales.model.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by zbyszek on 2017-08-06.
  */
@@ -53,5 +56,16 @@ public class ConsoleApp {
         /*System.out.println("total cost: "+cost);
         System.out.println("can efford?: "+client.canAfford(cost));
         System.out.println("balance: "+client.balance());*/
+
+        System.out.println("test \"Money convert(String targetCurrency, Double exRate)\"");
+        System.out.println(Money.valueOf(1,"USD").convert("PLN",3.60));
+
+        Map<String, Double> rates = new HashMap<>();
+        rates.put("USD", 3.6020);
+        rates.put("EUR", 4.2345);
+        CurrencyConverter c = new CurrencyConverter("PLN", rates);
+
+        System.out.println(c.convert(Money.valueOf(1,"USD")));
+        System.out.println(c.convert(Money.valueOf(1,"EUR")));
     }
 }
