@@ -38,6 +38,6 @@ public class CurrencyConverter {
         else {
             amount = convert(amount);
             return amount.convert(currency, 1 / exchangeRates.get(currency));
-        }
+        }//
     }
 }
