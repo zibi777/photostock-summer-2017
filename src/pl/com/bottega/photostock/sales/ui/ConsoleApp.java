@@ -64,8 +64,14 @@ public class ConsoleApp {
         rates.put("USD", 3.6020);
         rates.put("EUR", 4.2345);
         CurrencyConverter c = new CurrencyConverter("PLN", rates);
-
+        System.out.println("test c.convert....");
         System.out.println(c.convert(Money.valueOf(1,"USD")));
         System.out.println(c.convert(Money.valueOf(1,"EUR")));
+
+        System.out.println("test ZADANIE 3");
+        System.out.println(c.convert (Money.valueOf(2,"PLN"), "USD")  );
+
+        System.out.println("test ZADANIE 3 : konwersja z EUR na USD");
+        System.out.println(c.convert (Money.valueOf(1,"EUR"), "USD")  );
     }
 }
