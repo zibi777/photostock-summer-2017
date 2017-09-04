@@ -1,8 +1,5 @@
 package pl.com.bottega.photostock.sales.model;
 
-/**
- * Created by zbyszek on 2017-08-19.
- */
 public class Money implements Comparable<Money> {
 
     public static final String DEFAULT_CURRENCY = "CREDIT";
@@ -30,7 +27,11 @@ public class Money implements Comparable<Money> {
     }
 
     public static Money valueOf(double value) {
-        return new Money((long)(value *100.0),DEFAULT_CURRENCY);
+        return new Money((long) (value * 100.0), DEFAULT_CURRENCY);
+    }
+
+    public static Money valueOf(double value, String currency) {
+        return new Money((long) (value * 100.0), currency);
     }
 
     public Money add(Money other) {
@@ -38,14 +39,17 @@ public class Money implements Comparable<Money> {
         return new Money(cents + other.cents, currency);
     }
 
-    public Money subtract(Money other) {
-        checkCurrency(other);
-        return new Money(cents - other.cents, currency);
-    }
-
     private void checkCurrency(Money other) {
         if (!currency.equals(other.currency))
-            throw new IllegalArgumentException("Incompatibles currencies");
+            throw new IllegalArgumentException("Incompatible currencies");
+    }
+
+    public Money sub(Money other) {
+        return add(other.neg());
+    }
+
+    public Money neg() {
+        return new Money(-cents, currency);
     }
 
     public String toString() {
@@ -68,10 +72,6 @@ public class Money implements Comparable<Money> {
         int result = cents.hashCode();
         result = 31 * result + currency.hashCode();
         return result;
-    }
-
-    public Money neg() {
-        return new Money(-cents, currency);
     }
 
     @Override
@@ -100,13 +100,11 @@ public class Money implements Comparable<Money> {
         return new Money(cents * percent / 100, currency);
     }
 
-    public String getCurrency() {
-        return currency;
+    public Money convert(String targetCurrency, double exRate) {
+        return new Money(Math.round(cents * exRate), targetCurrency);
     }
-    public String currency(){
+
+    public String currency() {
         return currency;
-    }
-    public Money convert(String targetCurrency, Double exRate){
-        return new Money((long) (exRate*cents),targetCurrency);
     }
 }

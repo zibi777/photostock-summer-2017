@@ -1,18 +1,16 @@
 package pl.com.bottega.photostock.sales.model;
 
-/**
- * Created by zbyszek on 2017-08-26.
- */
 public class Clip extends AbstractProduct {
 
-    private Integer length;
+    private Long length;
 
-    public Clip(Long number, Money price, Boolean active, Integer length) {
-        super(number, price, active);
+    public Clip(Money price, Boolean active, Long number, Long length) {
+        super(price, active, number);
         this.length = length;
     }
 
-    public Integer getLength() {
-        return length;
+    public Clip(Money price, Long number, Long length) {
+        this(price, true, number, length);
     }
+
 }

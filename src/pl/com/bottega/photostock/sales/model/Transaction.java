@@ -2,9 +2,6 @@ package pl.com.bottega.photostock.sales.model;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by zbyszek on 2017-08-20.
- */
 public class Transaction {
 
     private Money amount;

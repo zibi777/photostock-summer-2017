@@ -2,36 +2,43 @@ package pl.com.bottega.photostock.sales.model;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.UUID;
 
-/**
- * Created by zbyszek on 2017-08-19.
- */
 public class Reservation {
 
     private Client owner;
-    private Collection<AbstractProduct> items = new LinkedList<>();
+    private Collection<Product> items = new LinkedList<>();
+    private String number;
 
-    public Reservation(Client owner){
+    public Reservation(Client owner) {
+        this.number = UUID.randomUUID().toString();
         this.owner = owner;
     }
 
-    public void add(AbstractProduct picture){
-        if (!picture.isAvailable())
-            throw new IllegalStateException("Product is not avilable");
-        items.add(picture);
-        picture.reservedPer(owner);
+    public void add(Product product) {
+        product.ensureAvailable();
+
+        items.add(product);
+        product.reservedPer(owner);
     }
-    public void remove (AbstractProduct picture){
-        if (items.remove(picture))
-            picture.unreservedPer(owner);
+
+    public void remove(Product product) {
+        if (items.remove(product))
+            product.unreservedPer(owner);
         else
             throw new IllegalArgumentException("Product is not part of this reservation");
-
     }
-    public  Offer generateOffer() {
+
+    public Offer generateOffer() {
         return new Offer(owner, items);
     }
+
     public int getItemsCount() {
         return items.size();
     }
+
+    public String getNumber() {
+        return number;
+    }
+
 }
